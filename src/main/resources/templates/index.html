@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Population</title>
+</head>
+<body>
+<ul>
+    <li th:each="city: ${cities}">
+        <a th:href="${'/city/'+city.getId()}" th:text="${city.getName()}"> </a>
+    </li>
+</ul>
+</body>
+</html>

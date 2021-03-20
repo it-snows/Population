@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${city.getName()}"></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<h1 th:text="${city.getName()}"></h1>
+<h3 th:text="${city.getRegion().getName()}"></h3>
+<table id="datatable">
+    <thead>
+    <tr>
+        <th>Year</th>
+        <th>Population</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pop: ${city.getPopulation()}">
+        <td class="year-data" th:text="${pop.getYear()}"></td>
+        <td class="population-data" th:text="${pop.getPopulation()}"></td>
+    </tr>
+    </tbody>
+</table>
+<canvas id="populationGraph" width="1400" height="200" style="border:1px solid #000000;">
+</canvas>
+
+<script>
+
+    $(function() {
+    let c = document.getElementById('populationGraph');
+    let ctx = c.getContext('2d');
+
+<!--    ctx.fillStyle = 'green';-->
+<!--    ctx.fillRect(5,5,30,100);-->
+<!--    ctx.fillStyle = 'red';-->
+<!--    ctx.fillRect(50,5,30,80);-->
+<!--    ctx.font = "10px Arial";-->
+<!--    ctx.fillStyle = 'black';-->
+
+    let allYears = $('.year-data');
+
+   // console.log(allYears);
+
+    let allPopulationData = $('.population-data');
+
+    for (let i = 0; i < allYears.length; i++) {
+
+            ctx.fillStyle = 'black';
+
+            ctx.font = "10px Arial";
+            ctx.fillText(allYears[i].innerText, 5 + (i * 30), 190);
+            ctx.font = "6px Arial";
+            ctx.fillText(allPopulationData[i].innerText, 5 + (i * 30), 10);
+
+            ctx.fillStyle = 'red';
+
+            let height = 10;
+
+            ctx.fillRect(5 + (i * 30), 170, 25, height);
+
+        }
+    });
+
+</script>
+
+</body>
+</html>
