@@ -33,6 +33,17 @@ public class MainController {
         return "details";
     }
 
+    @GetMapping("/region/{id}/cities")
+    public String getCitiesInRegion(@PathVariable int id, Model model) {
+
+        var dm = new DatabaseManager();
+        var cities = dm.getCitiesByRegionId(id);
+
+        model.addAttribute("cities", cities);
+
+        return "cities_in_region";
+    }
+
     @GetMapping("/chart/{id}")
     public String getGoogleChart(@PathVariable int id, Model model) {
         var dm = new DatabaseManager();

@@ -254,6 +254,29 @@ public class DatabaseManager {
         return null;
     }
 
+    public List<City> getCitiesByRegionId(int regionId){
+        List<City> items = new ArrayList<>();
+
+        try {
+            var con = getConnection();
+
+            var stmt = con.prepareCall("{CALL spGetCitiesInRegion(?)}");
+
+            stmt.setInt(1, regionId);
+
+            var rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                items.add(City.create(rs));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return items;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(connectionUrl, "test", "test123");
     }

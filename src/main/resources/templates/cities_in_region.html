@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cities in region</title>
+</head>
+<body>
+<ul>
+    <li th:each="city: ${cities}">
+        <a th:href="${'/chart/'+city.getId()}" th:text="${city.getName()}"> </a>
+    </li>
+</ul>
+</body>
+</html>
